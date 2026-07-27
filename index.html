@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do you have the Pork Sweats?</title>
+<meta name="description" content="A condition affecting an unknown number of people. Symptoms, onset times, four stages, and no evidence whatsoever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#EFF3F1;
+  --surface:#FFFFFF;
+  --ink:#122622;
+  --mid:#53625D;
+  --faint:#8A9994;
+  --line:#DBE3E0;
+  --brand:#0E7C66;
+  --brand-dk:#0A5C4C;
+  --p1:#F2CBCF;
+  --p2:#E5A0A8;
+  --p3:#D4737F;
+  --p4:#B8455A;
+  --gut:clamp(1.25rem,5vw,5rem);
+  --sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--sans);font-size:1.0625rem;line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;
+}
+h1,h2,h3{margin:0;font-weight:700;line-height:1.05;letter-spacing:-.025em}
+p{margin:0}
+.meta{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.wrap{max-width:76rem;margin:0 auto;padding:0 var(--gut)}
+
+.nav{position:sticky;top:0;z-index:10;background:rgba(239,243,241,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:3.75rem;gap:1rem}
+.nav .mark{font-weight:700;letter-spacing:-.03em;font-size:1.05rem}
+.nav .mark span{color:var(--brand)}
+.chip{
+  display:inline-flex;align-items:center;gap:.45rem;background:var(--surface);
+  border:1px solid var(--line);border-radius:999px;padding:.32rem .8rem;
+  font-size:.8rem;color:var(--mid);
+}
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--p4);display:block}
+
+/* hero */
+.hero{padding:clamp(3rem,10vh,6.5rem) 0 clamp(2.5rem,6vh,4rem)}
+.hero .eyebrow{margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.6rem,7.6vw,6.2rem);line-height:.98;max-width:16ch;letter-spacing:-.04em}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.sub{
+  font-size:clamp(1.5rem,3.6vw,2.4rem);font-weight:500;letter-spacing:-.03em;
+  margin-top:1.25rem;color:var(--brand);
+}
+.hero .body{max-width:44ch;margin-top:1.5rem;font-size:1.1rem;color:var(--mid)}
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:1.5rem;
+  margin-top:clamp(2.25rem,5vh,3.25rem);border-top:1px solid var(--ink);padding-top:1.1rem;
+}
+.facts dt{margin-bottom:.3rem}
+.facts dd{margin:0;font-size:1.2rem;font-weight:500;letter-spacing:-.02em}
+
+section{padding:clamp(3rem,8vh,5.5rem) 0;border-top:1px solid var(--line)}
+.sec{display:grid;grid-template-columns:minmax(0,12rem) minmax(0,1fr);gap:0 clamp(1.5rem,5vw,4.5rem);align-items:start}
+.sec > header{position:sticky;top:5.25rem}
+.sec > header h2{font-size:1.5rem;margin-top:.55rem}
+.hold{max-width:39rem}
+.hold > * + *{margin-top:1.3rem}
+.muted{color:var(--mid)}
+.kick{font-size:clamp(1.35rem,2.9vw,1.8rem);font-weight:500;letter-spacing:-.03em;line-height:1.2}
+.kick.a{color:var(--brand)}
+
+/* checklist */
+.check{border-top:1px solid var(--line)}
+.check li{
+  list-style:none;display:grid;grid-template-columns:1.4rem minmax(0,1fr);gap:.85rem;
+  padding:.85rem 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.check{padding:0;margin:0}
+.box{
+  width:1.15rem;height:1.15rem;border:1.5px solid var(--brand);border-radius:4px;
+  margin-top:.2rem;flex:none;
+}
+.verdict{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.35rem 1.5rem;
+}
+.verdict p + p{margin-top:.7rem}
+.verdict .big{font-size:1.2rem;font-weight:500;letter-spacing:-.02em}
+
+/* chart — three columns so nothing overlaps */
+.axis{
+  display:grid;grid-template-columns:minmax(8rem,11rem) minmax(0,1fr) 8.5rem;
+  gap:0 1.25rem;border-bottom:1px solid var(--ink);padding-bottom:.4rem;
+}
+.ticks{display:grid;grid-template-columns:repeat(4,1fr)}
+.ticks span{border-left:1px solid var(--line);padding-left:.4rem}
+.ticks span:first-child{border-left:0;padding-left:0}
+.row{
+  display:grid;grid-template-columns:minmax(8rem,11rem) minmax(0,1fr) 8.5rem;
+  gap:0 1.25rem;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--line);
+}
+.row .nm{font-size:.95rem;line-height:1.3}
+.track{position:relative;height:1rem;display:flex;align-items:center}
+.track::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.bar{position:relative;height:2px;width:var(--p);background:var(--p4);border-radius:2px}
+.bar::after{
+  content:"";position:absolute;right:-4px;top:-3.5px;width:9px;height:9px;
+  border-radius:50%;background:inherit;
+}
+.row.s1 .bar{background:var(--p1)}
+.row.s2 .bar{background:var(--p2)}
+.row.s3 .bar{background:var(--p3)}
+.val{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--mid);text-align:right}
+.val b{color:var(--ink);font-weight:500;display:block}
+@media (prefers-reduced-motion:no-preference){
+  .bar{animation:grow .8s cubic-bezier(.16,.84,.28,1) both}
+  @keyframes grow{from{width:0}to{width:var(--p)}}
+}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.15rem;margin-top:1.1rem}
+.legend span{display:flex;align-items:center;gap:.4rem}
+.legend i{width:8px;height:8px;border-radius:50%;display:block}
+
+/* stages */
+.stages{counter-reset:s;padding:0;margin:0}
+.stage{
+  list-style:none;counter-increment:s;display:grid;grid-template-columns:2.6rem minmax(0,1fr);
+  gap:1rem;padding:1.35rem 0;border-bottom:1px solid var(--line);
+}
+.stage:last-child{border-bottom:0}
+.stage::before{content:"0" counter(s);font-weight:700;font-size:1.15rem;color:var(--p2);letter-spacing:-.02em}
+.stage:last-child::before{color:var(--p4)}
+.stage h3{font-size:1.15rem;margin-bottom:.3rem}
+
+/* testimonials */
+.quote{padding:1.3rem 0;border-bottom:1px solid var(--line)}
+.quote:last-child{border-bottom:0}
+.quote p{font-size:1.1rem;line-height:1.45}
+.quote .who{margin-top:.5rem}
+
+.rec-row{display:grid;grid-template-columns:3.75rem minmax(0,1fr);gap:1.1rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.rec-row:last-child{border-bottom:0}
+.rec-row .y{font-weight:700;font-size:.98rem;letter-spacing:-.02em}
+.rec-row:last-child .y{color:var(--brand)}
+
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.75rem}
+.pair h3{font-size:1.05rem;margin-bottom:.45rem}
+.pair p + p{margin-top:.6rem}
+
+/* small print */
+.fine{
+  border-top:1px solid var(--ink);margin-top:clamp(3rem,7vh,5rem);padding:1.5rem 0 0;
+  font-size:.82rem;line-height:1.65;color:var(--mid);max-width:60rem;
+}
+.fine p + p{margin-top:.7rem}
+footer{padding:1.25rem 0 2.75rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:.4rem 2rem;justify-content:space-between}
+
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,.84,.28,1)}
+  .rv.in{opacity:1;transform:none}
+}
+@media (max-width:56rem){
+  .sec{grid-template-columns:minmax(0,1fr);gap:1.4rem}
+  .sec > header{position:static}
+  .axis{display:none}
+  .row{grid-template-columns:minmax(0,1fr);gap:.3rem;padding:.85rem 0}
+  .val{text-align:left}
+  .val b{display:inline}
+  .track{width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <span class="mark">Pork<span>Sweats</span></span>
+  <span class="chip"><i></i>Untreatable</span>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <p class="meta eyebrow">A condition affecting an unknown number of people</p>
+  <h1>Do you have the <em>Pork Sweats?</em></h1>
+  <p class="sub">You're not alone.</p>
+  <p class="body">Every weekend, people push back from a table, loosen exactly one button, and quietly become a heat source. Most of them think it's the room. It is not the room.</p>
+  <dl class="facts">
+    <div><dt class="meta">Recognized by</dt><dd>Nobody</dd></div>
+    <div><dt class="meta">Peak stage</dt><dd>IV, ambient</dd></div>
+    <div><dt class="meta">Studies confirming</dt><dd>Zero</dd></div>
+    <div><dt class="meta">Known cure</dt><dd>Also zero</dd></div>
+  </dl>
+</div></header>
+
+<main>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">One</p><h2>Symptom check</h2></header>
+  <div class="hold">
+    <p class="muted">Check all that apply.</p>
+    <ul class="check">
+      <li><span class="box"></span><span>You are warm in a room where nobody else is warm.</span></li>
+      <li><span class="box"></span><span>You have blamed the room.</span></li>
+      <li><span class="box"></span><span>You removed one article of clothing and described it as getting comfortable.</span></li>
+      <li><span class="box"></span><span>Someone asked if you were okay and you said "yeah, it's just hot in here."</span></li>
+      <li><span class="box"></span><span>You have stopped talking, but you are still nodding.</span></li>
+      <li><span class="box"></span><span>You are reading this at a barbecue.</span></li>
+    </ul>
+    <div class="verdict">
+      <p class="big">One or more: you have the pork sweats.</p>
+      <p class="muted">Zero: you have not eaten enough pork. This is a separate problem and it is worse.</p>
+    </div>
+  </div>
+</div></div></section>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">Two</p><h2>Onset</h2></header>
+  <div class="hold">
+    <p class="muted">Time from final bite to first symptom. Shorter is worse.</p>
+    <div>
+      <div class="axis">
+        <span></span>
+        <span class="ticks meta"><span>0 min</span><span>15</span><span>30</span><span>45</span></span>
+        <span></span>
+      </div>
+      <div class="row"><span class="nm">Whole hog, family reunion</span>
+        <span class="track" style="--p:2%"><span class="bar"></span></span>
+        <span class="val"><b>immediate</b>stage IV</span></div>
+      <div class="row"><span class="nm">Pork belly burnt ends</span>
+        <span class="track" style="--p:33%"><span class="bar"></span></span>
+        <span class="val"><b>15 min</b>stage IV</span></div>
+      <div class="row s3"><span class="nm">Full rack of ribs</span>
+        <span class="track" style="--p:44%"><span class="bar"></span></span>
+        <span class="val"><b>20 min</b>stage III</span></div>
+      <div class="row s2"><span class="nm">Pulled pork sandwich</span>
+        <span class="track" style="--p:67%"><span class="bar"></span></span>
+        <span class="val"><b>30 min</b>stage II</span></div>
+      <div class="row s1"><span class="nm">One pork chop</span>
+        <span class="track" style="--p:100%"><span class="bar"></span></span>
+        <span class="val"><b>45 min</b>stage I</span></div>
+      <div class="row"><span class="nm">Bacon, a normal amount</span>
+        <span class="track"></span>
+        <span class="val"><b>no onset</b>warm-up only</span></div>
+    </div>
+    <div class="legend meta">
+      <span><i style="background:var(--p1)"></i>I</span>
+      <span><i style="background:var(--p2)"></i>II</span>
+      <span><i style="background:var(--p3)"></i>III</span>
+      <span><i style="background:var(--p4)"></i>IV</span>
+    </div>
+    <p class="kick">Bacon is the control group.</p>
+  </div>
+</div></div></section>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">Three</p><h2>The four stages</h2></header>
+  <div class="hold">
+    <ul class="stages">
+      <li class="stage"><div><h3>Confidence</h3><p class="muted">"I could eat this every day," you say. Out loud. To people who will remember.</p></div></li>
+      <li class="stage"><div><h3>The sheen</h3><p class="muted">You blame the room. You are the only one blaming the room.</p></div></li>
+      <li class="stage"><div><h3>The unbuttoning</h3><p class="muted">Framed as comfort. It is not comfort. Everyone at the table understands what they have just witnessed.</p></div></li>
+      <li class="stage"><div><h3>Ambient</h3><p class="muted">You are now a heat source. Small children give you space. A thermostat somewhere is making a decision it will not be able to justify.</p></div></li>
+    </ul>
+  </div>
+</div></div></section>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">Four</p><h2>The science</h2></header>
+  <div class="hold">
+    <p>Digesting protein costs 20–30% of its own calories. Carbohydrates cost 5–15%. Fat costs 3%. Eat enough pork and the arithmetic says you should warm up.</p>
+    <p class="muted">That is the entire theory. It is not a medical term. No study confirms it. Merriam-Webster has declined to comment, which we are choosing to read as fear.</p>
+    <p class="kick a">Evidence: everyone who has had it.</p>
+  </div>
+</div></div></section>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">Five</p><h2>Management</h2></header>
+  <div class="hold">
+    <div class="pair">
+      <div>
+        <h3>Prevention</h3>
+        <p class="muted">Three to six ounces. Eat a vegetable. Drink water during rather than after.</p>
+        <p class="muted">No one has ever done this.</p>
+      </div>
+      <div>
+        <h3>Treatment</h3>
+        <p class="muted">Asked how to handle the meat sweats, a charcuterie expert told <em>Food &amp; Wine</em> that you basically have to pass out and sweat it out.</p>
+        <p class="muted">That is the state of the art. That is the whole field.</p>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">Six</p><h2>From sufferers</h2></header>
+  <div class="hold">
+    <div class="quote"><p>"I ordered the two-meat plate. It is meant for two. I have never told anyone how long the drive home took."</p><p class="meta who">Dale R. · verified</p></div>
+    <div class="quote"><p>"Five stars. I drove home in February with every window down and my wife did not speak to me until Tuesday."</p><p class="meta who">Marcus T. · verified</p></div>
+    <div class="quote"><p>"I fell asleep sitting upright at 7:40 in the evening and I would do it again."</p><p class="meta who">Jeanine P. · verified</p></div>
+    <div class="quote"><p>"Bacon cannot do this to a person. I am typing this from a cold bathroom floor, but bacon cannot do this to a person."</p><p class="meta who">Anonymous · verified</p></div>
+  </div>
+</div></div></section>
+
+<section><div class="wrap"><div class="sec rv">
+  <header><p class="meta">Seven</p><h2>On the record</h2></header>
+  <div class="hold">
+    <div>
+      <div class="rec-row"><span class="y">2001</span><p class="muted">A man on <em>Friends</em> eats an entire turkey and names the parent condition on national television. No one follows up for eight years.</p></div>
+      <div class="rec-row"><span class="y">2009</span><p class="muted"><em>American Dad</em> says the actual words. First clear attestation of the species.</p></div>
+      <div class="rec-row"><span class="y">2022</span><p class="muted">Arby's and Old Spice release a Meat Sweat Defense kit with a roast beef sweatsuit and a towel. Commerce arrives seventeen years before science.</p></div>
+      <div class="rec-row"><span class="y">2024</span><p class="muted">Food Network airs an episode titled <em>Pork Sweats!</em> and at no point explains itself.</p></div>
+      <div class="rec-row"><span class="y">2026</span><p class="muted">This website, which is the most rigorous work done on the subject to date.</p></div>
+    </div>
+  </div>
+</div></div></section>
+
+<div class="wrap"><div class="fine">
+  <p class="meta">Important safety information</p>
+  <p>Pork Sweats is not a drug, device, treatment, or product. Pork Sweats is a thing that happens to you. Side effects may include a second plate, a nap you did not schedule, and telling the story at work on Monday.</p>
+  <p>Do not operate a smoker while experiencing stage IV. Do not attempt to explain the condition to someone currently experiencing it. Ask your friends whether barbecue is right for you; they will say yes, because they also want barbecue.</p>
+</div></div>
+
+<footer><div class="wrap">
+  <span class="meta">Not medical advice · Not medical anything</span>
+  <span class="meta">porksweats.com · 2026</span>
+</div></footer>
+
+<script>
+if(window.matchMedia('(prefers-reduced-motion: no-preference)').matches){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{rootMargin:'0px 0px -12% 0px',threshold:.05});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+}else{
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+}
+</script>
+
+</body>
+</html>
